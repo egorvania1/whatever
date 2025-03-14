@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://hfxpkll330p7"]
+
+[ext_resource type="PackedScene" uid="uid://c87tyqy3xs0cb" path="res://player.tscn" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://pyi8wbdu8m35" path="res://scripts/coin_spawn_area.gd" id="2_fj7yv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ji6pe"]
+size = Vector2(1081, 578)
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_f3sb7")]
+position = Vector2(577, 322)
+
+[node name="ScoreLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 21.0
+offset_top = 571.0
+offset_right = 51.0
+offset_bottom = 625.0
+theme_override_font_sizes/font_size = 39
+text = "0"
+
+[node name="CoinSpawnArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_fj7yv")
+
+[node name="CoinSpawnCollisionShape2D" type="CollisionShape2D" parent="CoinSpawnArea"]
+unique_name_in_owner = true
+position = Vector2(577.5, 326)
+shape = SubResource("RectangleShape2D_ji6pe")
+
+[node name="CoinSpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="GameBorder" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GameBorder"]
+build_mode = 1
+polygon = PackedVector2Array(0, 1, 1154, -1, 1152, 645, 2, 650)
+
+[connection signal="timeout" from="CoinSpawnTimer" to="CoinSpawnArea" method="_on_coin_spawn_timer_timeout"]
