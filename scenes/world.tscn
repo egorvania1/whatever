@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://pyi8wbdu8m35" path="res://scripts/coin_spawn_area.gd" id="2_fj7yv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ji6pe"]
-size = Vector2(1081, 578)
+size = Vector2(212, 162)
 
 [node name="World" type="Node2D"]
 
@@ -19,6 +19,7 @@ script = ExtResource("2_fj7yv")
 
 [node name="CoinSpawnCollisionShape2D" type="CollisionShape2D" parent="CoinSpawnArea"]
 unique_name_in_owner = true
+position = Vector2(-1, 2)
 shape = SubResource("RectangleShape2D_ji6pe")
 
 [node name="CoinSpawnTimer" type="Timer" parent="."]
@@ -29,10 +30,11 @@ position = Vector2(576, 322)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GameBorder"]
 build_mode = 1
-polygon = PackedVector2Array(-579, -322, 576, -322, 574, 322, -581, 320)
+polygon = PackedVector2Array(-106, -79, 105, -80, 105, 82, -106, 81)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(577, 322)
+zoom = Vector2(3, 3)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -54,7 +56,7 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 30
 text = "0"
 
 [connection signal="timeout" from="CoinSpawnTimer" to="CoinSpawnArea" method="_on_coin_spawn_timer_timeout"]

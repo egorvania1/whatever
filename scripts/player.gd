@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 500
+const SPEED = 200
 var score: int
 @onready var scorelabel = %ScoreLabel
 

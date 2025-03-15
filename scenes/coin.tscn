@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://rimwednqff3p"]
+[gd_scene load_steps=9 format=3 uid="uid://rimwednqff3p"]
 
 [ext_resource type="Script" uid="uid://co15vgkspdg6d" path="res://scripts/coin.gd" id="1_i64fm"]
 [ext_resource type="Texture2D" uid="uid://dbvew3j52v858" path="res://sprites/coin.png" id="2_i64fm"]
 [ext_resource type="AudioStream" uid="uid://hhw0mx80k5n6" path="res://sounds/Coin.ogg" id="3_11l1o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0t63x"]
-radius = 17.0
+radius = 8.06226
 
 [sub_resource type="Animation" id="Animation_11l1o"]
 resource_name = "collect"
@@ -60,10 +60,39 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icon:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1ikuy"]
+resource_name = "blink"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.156863), Color(1, 1, 1, 1), Color(1, 1, 1, 0.156863)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1ikuy"]
 _data = {
 &"RESET": SubResource("Animation_d14el"),
+&"blink": SubResource("Animation_1ikuy"),
 &"collect": SubResource("Animation_11l1o")
 }
 
@@ -74,6 +103,7 @@ script = ExtResource("1_i64fm")
 shape = SubResource("CircleShape2D_0t63x")
 
 [node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-1, 1)
 texture = ExtResource("2_i64fm")
 
 [node name="PickSound" type="AudioStreamPlayer" parent="."]
@@ -85,5 +115,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_1ikuy")
 }
 
+[node name="LifeTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
