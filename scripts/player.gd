@@ -12,3 +12,9 @@ func _physics_process(delta: float) -> void:
 func add_point() -> void:
 	score += 1
 	scorelabel.text = str(score)
+	
+	if score == 50: gameover()
+
+func gameover() -> void:
+	OS.alert("50 монеток вау ты молодец skill exists", "Game oVer")
+	get_tree().quit()
