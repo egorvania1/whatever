@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 200
+const SPEED = 6000
 var score: int
 @onready var scorelabel = %ScoreLabel
 var time_start = 0
@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * SPEED
+	velocity = input_direction * SPEED * delta
 	move_and_slide()
 	
 func add_point() -> void:
