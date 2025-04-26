@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://hfxpkll330p7"]
+[gd_scene load_steps=6 format=3 uid="uid://hfxpkll330p7"]
 
 [ext_resource type="PackedScene" uid="uid://c87tyqy3xs0cb" path="res://scenes/player.tscn" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://cnmq0qrt2qhsm" path="res://scenes/world.gd" id="1_k0juu"]
 [ext_resource type="Script" uid="uid://pyi8wbdu8m35" path="res://scripts/coin_spawn_area.gd" id="2_fj7yv"]
 [ext_resource type="FontFile" uid="uid://yush3lgtdaip" path="res://at01.ttf" id="3_4wyf3"]
 
@@ -8,6 +9,7 @@
 size = Vector2(212, 162)
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_k0juu")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1

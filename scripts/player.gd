@@ -3,6 +3,11 @@ extends CharacterBody2D
 const SPEED = 200
 var score: int
 @onready var scorelabel = %ScoreLabel
+var time_start = 0
+var time_now = 0
+
+func _ready() -> void:
+	time_start = Time.get_unix_time_from_system()
 
 func _physics_process(delta: float) -> void:
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -16,5 +21,9 @@ func add_point() -> void:
 	if score == 50: gameover()
 
 func gameover() -> void:
-	OS.alert("50 монеток вау ты молодец skill exists", "Game oVer")
+	time_now = Time.get_unix_time_from_system()
+	var time_elapsed = time_now - time_start
+	
+	var result_time = "Потрачено времени: " + str(Time.get_time_string_from_unix_time(time_elapsed))
+	OS.alert(result_time, "Игра окончена!")
 	get_tree().quit()
